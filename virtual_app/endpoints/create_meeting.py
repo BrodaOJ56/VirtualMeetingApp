@@ -8,4 +8,4 @@ def create_meeting(request):
         pass
     else:
         # Render the create meeting form template
-        return render(request, 'your_app/create_meeting.html')
+        return render(request, 'virtual_app/create_meeting.html')
