@@ -8,5 +8,7 @@ def list_participants(request, meeting_id):
     # Get the participants for the meeting
     participants = Participant.objects.filter(meeting=meeting)
     
-    # Implement other participant list view logic here
+    # order participants by their names alphabetically
+    participants = participants.order_by('name')
+    
     return render(request, 'virtual_app/list_participants.html', {'meeting': meeting, 'participants': participants})
