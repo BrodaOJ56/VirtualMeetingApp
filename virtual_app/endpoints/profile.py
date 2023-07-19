@@ -1,5 +1,14 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def profile(request):
-    # Implement your profile view logic here
-    return render(request, 'virtual_app/profile.html')
+    user = request.user
+    # fetch user-related data from the database or any other data source
+    user_data = {
+        'username': user.username,
+        'email': user.email,
+        # Add more user-related data fields as needed
+    }
+    
+    return render(request, 'virtual_app/profile.html', {'user_data': user_data})
