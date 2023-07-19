@@ -8,5 +8,7 @@ def list_recordings(request, meeting_id):
     # Get the recordings for the meeting
     recordings = MeetingRecording.objects.filter(meeting=meeting)
     
-    # Implement other recording list view logic here
+    # order recordings by their creation date in descending order
+    recordings = recordings.order_by('-created_at')
+    
     return render(request, 'virtual_app/list_recordings.html', {'meeting': meeting, 'recordings': recordings})
