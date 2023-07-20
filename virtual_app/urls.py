@@ -6,6 +6,7 @@ from .endpoints.list_participants import list_participants
 from .endpoints.list_recordings import list_recordings
 from .endpoints.meeting_detail import meeting_detail
 from .endpoints.profile import profile
+from .endpoints.join_meeting import meeting_room
 
 app_name = 'virtual_app'
 
@@ -17,6 +18,7 @@ urlpatterns = [
     path('meeting/create/', create_meeting, name='create_meeting'),
     path('meeting/<int:meeting_id>/', meeting_detail, name='meeting_detail'),
     path('meeting/<int:meeting_id>/join/', join_meeting, name='join_meeting'),
+    path('meeting/<int:meeting_id>/room/', meeting_room, name='meeting_room'),
 
     # Participant related URLs
     path('meeting/<int:meeting_id>/participants/', list_participants, name='list_participants'),
