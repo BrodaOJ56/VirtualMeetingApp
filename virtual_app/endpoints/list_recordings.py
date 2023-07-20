@@ -11,4 +11,4 @@ def list_recordings(request, meeting_id):
     # order recordings by their creation date in descending order
     recordings = recordings.order_by('-created_at')
     
-    return render(request, 'virtual_app/list_recordings.html', {'meeting': meeting, 'recordings': recordings})
+    return render(request, 'list_recordings.html', {'meeting': meeting, 'recordings': recordings})

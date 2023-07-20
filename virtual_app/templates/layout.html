@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Virtual App{% endblock %}</title>
+    <!-- Include your CSS and other meta tags here -->
+</head>
+<body>
+    <header>
+        <!-- Add your header content here -->
+        <h1>Virtual App</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'virtual_app:home' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'virtual_app:create_meeting' %}">Create Meeting</a></li>
+                    <li><a href="{% url 'virtual_app:profile' %}">Profile</a></li>
+                    <p><a href="{% url 'logout' %}">Log out</a></p>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Log In</a></li>
+                {% endif %}
+                <!-- Add more navigation links as needed -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% if user.is_authenticated %}
+            <p>Hi {{ user.username }}!</p>
+        {% else %}
+            <p>You are not logged in.</p>
+            <a href="{% url 'login' %}">Log In</a>
+        {% endif %}
+        <!-- Content from the extending templates will go here -->
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Add your footer content here -->
+        <p>© {{ year }} Virtual App. All rights reserved.</p>
+    </footer>
+</body>
+</html>

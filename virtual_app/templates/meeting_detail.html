@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %}Meeting Detail - Virtual App{% endblock %}
+
+{% block content %}
+    <h2>Meeting Detail</h2>
+    <p>Title: {{ meeting.title }}</p>
+    <p>Start Time: {{ meeting.start_time }}</p>
+    <p>End Time: {{ meeting.end_time }}</p>
+    <p>Host: {{ meeting.host.username }}</p>
+    
+    {% if has_started %}
+        {% if not has_ended %}
+            <a href="{% url 'virtual_app:join_meeting' meeting_id=meeting.id %}">Join Meeting</a>
+        {% endif %}
+    {% else %}
+        <p>The meeting has not started yet.</p>
+    {% endif %}
+{% endblock %}

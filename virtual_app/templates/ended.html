@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block title %}Meeting Ended - Virtual App{% endblock %}
+
+{% block content %}
+    <h2>Meeting Ended</h2>
+    <p>The meeting "{{ meeting.title }}" has already ended.</p>
+    <p>Start time: {{ meeting.start_time }}</p>
+    <p>End time: {{ meeting.end_time }}</p>
+{% endblock %}

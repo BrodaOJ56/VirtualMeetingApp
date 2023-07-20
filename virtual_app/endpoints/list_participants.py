@@ -11,4 +11,4 @@ def list_participants(request, meeting_id):
     # order participants by their names alphabetically
     participants = participants.order_by('name')
     
-    return render(request, 'virtual_app/list_participants.html', {'meeting': meeting, 'participants': participants})
+    return render(request, 'list_participants.html', {'meeting': meeting, 'participants': participants})

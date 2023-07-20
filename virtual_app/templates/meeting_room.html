@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}Meeting Room - Virtual App{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the Meeting Room</h2>
+    <p>Meeting Title: {{ meeting.title }}</p>
+    <p>Meeting Start Time: {{ meeting.start_time }}</p>
+    <p>Meeting End Time: {{ meeting.end_time }}</p>
+    
+    <!-- Add your meeting room content here -->
+    <p>Participants in this meeting:</p>
+    <ul>
+        <!-- Loop through participants and display their names -->
+        {% for participant in meeting.participants.all %}
+            <li>{{ participant.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- If you want to include the participant_token in the meeting room -->
+    <p>Your Participant Token: {{ participant_token }}</p>
+{% endblock %}

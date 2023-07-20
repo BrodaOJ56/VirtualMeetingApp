@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-# import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'virtual_app',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -53,10 +53,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'virtual_project.urls'
 
+LOGIN_REDIRECT_URL = 'virtual_app:home'
+LOGOUT_REDIRECT_URL = 'virtual_app:home'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(BASE_DIR.joinpath('templates'))],
+        'DIRS': [BASE_DIR / 'virtual_app' / 'templates'],  # Add the correct path to your app's templates directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +71,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'virtual_project.wsgi.application'
 

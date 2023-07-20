@@ -7,4 +7,4 @@ def home(request):
     }
     
     # Render the template with the data
-    return render(request, 'virtual_app/home.html', context=data)
+    return render(request, 'home.html', context=data)

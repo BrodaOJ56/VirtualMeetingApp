@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block title %}List Participants - Virtual App{% endblock %}
+
+{% block content %}
+    <h2>List Participants</h2>
+    <p>Participants for the meeting "{{ meeting.title }}":</p>
+    <ul>
+        {% for participant in participants %}
+            <li>{{ participant.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -11,7 +11,7 @@ def meeting_detail(request, meeting_id):
     has_started = meeting.start_time <= current_time
     has_ended = meeting.end_time <= current_time
     
-    return render(request, 'virtual_app/meeting_detail.html', {
+    return render(request, 'meeting_detail.html', {
         'meeting': meeting,
         'has_started': has_started,
         'has_ended': has_ended,

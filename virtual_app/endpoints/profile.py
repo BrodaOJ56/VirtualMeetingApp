@@ -11,4 +11,4 @@ def profile(request):
         # Add more user-related data fields as needed
     }
     
-    return render(request, 'virtual_app/profile.html', {'user_data': user_data})
+    return render(request, 'profile.html', {'user_data': user_data})

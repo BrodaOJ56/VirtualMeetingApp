@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block title %}List Recordings - Virtual App{% endblock %}
+
+{% block content %}
+    <h2>List Recordings</h2>
+    <p>Recordings for the meeting "{{ meeting.title }}":</p>
+    <ul>
+        {% for recording in recordings %}
+            <li><a href="{{ recording.url }}">{{ recording.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
