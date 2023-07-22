@@ -1,22 +1,89 @@
 {% extends 'layout.html' %}
 
-{% block title %}Meeting Room - Virtual App{% endblock %}
+{% block title %}Meeting Room{% endblock %}
 
 {% block content %}
-    <h2>Welcome to the Meeting Room</h2>
-    <p>Meeting Title: {{ meeting.title }}</p>
-    <p>Meeting Start Time: {{ meeting.start_time }}</p>
-    <p>Meeting End Time: {{ meeting.end_time }}</p>
-    
-    <!-- Add your meeting room content here -->
-    <p>Participants in this meeting:</p>
-    <ul>
-        <!-- Loop through participants and display their names -->
-        {% for participant in meeting.participants.all %}
-            <li>{{ participant.name }}</li>
-        {% endfor %}
-    </ul>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <h2>Meeting Room - {{ meeting.title }}</h2>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-8">
+      <div id="localVideoContainer">
+        <video id="localVideo" autoplay muted></video>
+      </div>
+    </div>
+    <div class="col-4">
+      <div id="remoteVideoContainer">
+        <!-- Remote videos will be displayed here -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
 
-    <!-- If you want to include the participant_token in the meeting room -->
-    <p>Your Participant Token: {{ participant_token }}</p>
+{% block scripts %}
+<!-- Add Bootstrap and other dependencies here, if not already included -->
+<script>
+  const meetingId = "{{ meeting.id }}";
+  const participantToken = '{{ participant_token }}';
+  const localVideo = document.getElementById('localVideo');
+  const remoteVideoContainer = document.getElementById('remoteVideoContainer');
+
+  // Function to initialize the video call
+  async function initializeVideoCall() {
+    // Get user media (video and audio)
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    localVideo.srcObject = stream;
+
+    // Create WebSocket connection
+    const webSocketProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+    const webSocketPath = '/ws/meeting/' + meetingId + '/';
+    const webSocketURL = webSocketProtocol + window.location.host + webSocketPath;
+    const webSocket = new WebSocket(webSocketURL);
+
+    // Event listener for WebSocket open
+    webSocket.onopen = () => {
+      console.log('WebSocket connection opened');
+      // Send participant information to server
+      webSocket.send(JSON.stringify({ type: 'join', token: participantToken }));
+    };
+
+    // Event listener for WebSocket message
+    webSocket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      handleSignalingMessage(message);
+    };
+
+    // Function to handle signaling messages (offer, answer, ice_candidate)
+    function handleSignalingMessage(message) {
+      switch (message.type) {
+        case 'offer':
+          // Handle offer and create answer
+          // ...
+          break;
+        case 'answer':
+          // Handle answer
+          // ...
+          break;
+        case 'ice_candidate':
+          // Handle ICE candidate
+          // ...
+          break;
+        default:
+          console.warn('Invalid signaling message type:', message.type);
+      }
+    }
+
+    // Function to send signaling messages to the server
+    function sendSignalingMessage(message) {
+      webSocket.send(JSON.stringify(message));
+    }
+  }
+
+  // Call the function to initialize the video call
+  initializeVideoCall();
+</script>
 {% endblock %}
