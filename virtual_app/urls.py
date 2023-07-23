@@ -1,4 +1,6 @@
-from django.urls import path
+# urls.py
+
+from django.urls import path, re_path
 from .endpoints.home import home
 from .endpoints.create_meeting import create_meeting
 from .endpoints.join_meeting import join_meeting, meeting_room
@@ -17,7 +19,9 @@ urlpatterns = [
     path('meeting/create/', create_meeting, name='create_meeting'),
     path('meeting/<int:meeting_id>/', meeting_detail, name='meeting_detail'),
     path('meeting/<int:meeting_id>/join/', join_meeting, name='join_meeting'),
-    path('meeting/<int:meeting_id>/room/', meeting_room, name='meeting_room'),
+
+    # Update the meeting_room URL pattern with a regex to capture the participant_token
+    re_path(r'^meeting/(?P<meeting_id>[0-9]+)/room/(?P<participant_token>[A-Za-z0-9_]+)/$', meeting_room, name='meeting_room'),
 
     # Participant related URLs
     path('meeting/<int:meeting_id>/participants/', list_participants, name='list_participants'),
