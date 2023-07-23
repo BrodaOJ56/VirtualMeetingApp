@@ -1,7 +1,7 @@
 from django.urls import path
 from .endpoints.home import home
 from .endpoints.create_meeting import create_meeting
-from .endpoints.join_meeting import join_meeting, meeting_room  # Removed the duplicate import
+from .endpoints.join_meeting import join_meeting, meeting_room
 from .endpoints.list_participants import list_participants
 from .endpoints.list_recordings import list_recordings
 from .endpoints.meeting_detail import meeting_detail
