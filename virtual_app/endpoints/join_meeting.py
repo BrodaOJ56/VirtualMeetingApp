@@ -17,7 +17,7 @@ def join_meeting(request, meeting_id):
     meeting_start_time = timezone.localtime(meeting.start_time)
 
     # Check if the meeting has already started or ended
-    has_started = meeting_start_time <= current_time
+    has_started = current_time >= meeting_start_time
     has_ended = meeting.end_time <= current_time
 
     if not has_started:
@@ -38,8 +38,11 @@ def join_meeting(request, meeting_id):
             
             # Save the participant's details to the database or handle as needed
             
-            # Redirect to the meeting room or any other desired page
-            return redirect('virtual_app:meeting_room', meeting_id=meeting_id)
+            # Generate a unique participant token (similar to the previous implementation)
+            participant_token = generate_token(request.user)
+            
+            # Redirect to the meeting room with the participant_token as a query parameter
+            return redirect('virtual_app:meeting_room', meeting_id=meeting_id, participant_token=participant_token)
     else:
         # If it's a GET request, display the form for the user to enter their details
         form = ParticipantForm()
@@ -49,14 +52,21 @@ def join_meeting(request, meeting_id):
         'form': form,
     })
 
-def meeting_room(request, meeting_id):
+def meeting_room(request, meeting_id, participant_token):
     # Get the meeting object or return a 404 error if not found
     meeting = get_object_or_404(Meeting, id=meeting_id)
-    
-    # Retrieve the participant_token from the request (assumed to be passed in the URL query params)
-    participant_token = request.GET.get('participant_token', '')
-    
+
     return render(request, 'meeting_room.html', {
         'meeting': meeting,
         'participant_token': participant_token,
     })
+
+def generate_token(user):
+    # Generate a random alphanumeric token
+    length = 10
+    token = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+    
+    # Add the user's username to the token for uniqueness
+    token += f"_{user.username}"
+    
+    return token
