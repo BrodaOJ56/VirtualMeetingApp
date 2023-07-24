@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>{% block title %}Virtual App{% endblock %}</title>
-    <!-- Include your CSS and other meta tags here -->
 </head>
 <body>
     <header>
@@ -14,7 +13,7 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'virtual_app:create_meeting' %}">Create Meeting</a></li>
                     <li><a href="{% url 'virtual_app:profile' %}">Profile</a></li>
-                    <p><a href="{% url 'logout' %}">Log out</a></p>
+                    <li><a href="{% url 'logout' %}">Log out</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Log In</a></li>
                 {% endif %}
@@ -39,5 +38,10 @@
         <!-- Add your footer content here -->
         <p>© {{ year }} Virtual App. All rights reserved.</p>
     </footer>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
