@@ -24,7 +24,28 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-4">
+            <div class="col">
+                <button id="startScreenShareBtn">Start Screen Share</button>
+            </div>
+        </div>
     </div>
-    <script src="{% static 'js/meeting_room.js' %}"></script>
+    <script src="{% static 'js/meeting_room.js' %}"></script><script>
+        const startScreenShareBtn = document.getElementById('startScreenShareBtn');
+      
+        // Event listener for the "Start Screen Share" button
+        startScreenShareBtn.addEventListener('click', async () => {
+          // Get user media (screen sharing)
+          const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+      
+          // Replace the local video stream with the screen sharing stream
+          localVideo.srcObject = stream;
+          
+          // Add the screen sharing stream to the peer connection
+          peer.addStream(stream);
+        });
+      </script>
+      
+
 </body>
 </html>
