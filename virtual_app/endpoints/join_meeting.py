@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from ..models import Meeting
 from datetime import datetime
 from django.utils import timezone
@@ -6,6 +7,7 @@ import random
 import string
 from .forms import ParticipantForm
 
+@login_required
 def join_meeting(request, meeting_id):
     # Get the meeting object or return a 404 error if not found
     meeting = get_object_or_404(Meeting, id=meeting_id)
@@ -52,13 +54,18 @@ def join_meeting(request, meeting_id):
         'form': form,
     })
 
+@login_required
 def meeting_room(request, meeting_id, participant_token):
     # Get the meeting object or return a 404 error if not found
     meeting = get_object_or_404(Meeting, id=meeting_id)
-
+    
+    # Check if the participant is the host
+    is_host = meeting.host == request.user
+    
     return render(request, 'meeting_room.html', {
         'meeting': meeting,
         'participant_token': participant_token,
+        'is_host': is_host,
     })
 
 def generate_token(user):
