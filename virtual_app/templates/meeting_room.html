@@ -1,4 +1,3 @@
-<!-- meeting_room.html -->
 {% load static %}
 
 {% block title %}Meeting Room - {{ meeting.title }}{% endblock %}
@@ -29,7 +28,8 @@
       <div>
         <button id="startButton">Start</button>
         <button id="callButton">Call</button>
-        <button id="upgradeButton">Turn on video</button>
+        <button id="upgradeButton" disabled>Turn on video</button>
+        <button id="shareScreenButton">Share Screen</button>
         <button id="hangupButton">Hang Up</button>
       </div>
       {% if is_host %}
@@ -55,6 +55,17 @@
     // Add the screen sharing stream to the peer connection
     pc1.addTrack(stream.getVideoTracks()[0], stream);
     upgradeButton.disabled = true;
+  });
+
+  const shareScreenButton = document.getElementById('shareScreenButton');
+
+  // Event listener for the "Share Screen" button
+  shareScreenButton.addEventListener('click', async () => {
+    // Get user media (screen sharing)
+    const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+
+    // Add the screen sharing stream to the peer connection
+    pc1.addTrack(stream.getVideoTracks()[0], stream);
   });
 </script>
 </body>
