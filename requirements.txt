@@ -1,7 +1,13 @@
 asgiref==3.7.2
+Brotli==1.0.9
 channels==4.0.0
 channels-redis==4.1.0
+dj-database-url==2.0.0
 Django==4.2.3
+django-cors-headers==4.2.0
 msgpack==1.0.5
+psycopg2-binary==2.9.6
 redis==4.6.0
 sqlparse==0.4.4
+typing_extensions==4.7.1
+whitenoise==6.5.0
