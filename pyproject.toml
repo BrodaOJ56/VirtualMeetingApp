@@ -2,7 +2,7 @@
 name = "Virtual_App"
 version = "1.6.0.dev0"
 description = "Virtual Meeting App"
-authors = ["BrodaOJ <brodaoj2@gmail.com>"]
+authors = ["BrodaOJ <brodaoj@gmail.com>"]
 
 [build-system]
 requires = ["poetry>=1.0"]
