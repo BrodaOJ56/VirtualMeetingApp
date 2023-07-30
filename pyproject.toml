@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Virtual_App"
-version = "1.6.0.dev0"
+version = "1.6.0"
 description = "Virtual Meeting App"
 authors = ["BrodaOJ <brodaoj@gmail.com>"]
 
