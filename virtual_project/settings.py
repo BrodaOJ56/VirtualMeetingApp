@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-ryt9g-si=o86#*-774ub@il4n^tg!=fydce+0kv5sn27od06$0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['virtualmeet.onrender.com', 'localhost', '127.0.0.1', '::1']
 
 
 # Application definition
