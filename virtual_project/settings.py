@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ryt9g-si=o86#*-774ub@il4n^tg!=fydce+0kv5sn27od06$0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['virtualmeet.onrender.com', 'localhost', '127.0.0.1', '::1']
 
@@ -135,7 +135,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+MEDIA_URL = '/media/'
 # import os
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
